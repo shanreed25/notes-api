@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { User } from "../../models/index.js";
+import User  from "../../models/User.js";
 import { signToken } from "../../utils/auth.js";
  
 const router = Router();
@@ -32,4 +32,4 @@ router.post('/login', async (req, res) => {
   res.json({ token, user });
 });
  
-module.exports = router;
+export default router;
