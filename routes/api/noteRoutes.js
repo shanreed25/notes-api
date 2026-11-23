@@ -2,6 +2,8 @@ import { Router } from "express";
 import { Note } from "../../models/index.js";
 import { authMiddleware } from "../../utils/auth.js";
  
+const router = Router();
+
 // Apply authMiddleware to all routes in this file
 router.use(authMiddleware);
  
