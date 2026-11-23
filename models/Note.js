@@ -16,8 +16,8 @@ const noteSchema = new Schema({
     default: Date.now,
   },
   user: { 
-    type: Schema.Types.ObjectId, 
-    ref: "User", 
+    type: Schema.Types.ObjectId, //user's id
+    ref: "User", // which model the id belongs to
     required: true 
   },
 });
