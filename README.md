@@ -47,6 +47,6 @@
 
 ###  Implement Ownership-Based Authorization
 - [X] **Filter “Get All Notes”:** Modify the `GET /` route. Instead of returning all notes in the database, it should now only return the notes where the user field matches the `_id` of the currently authenticated user (`req.user._id`).
-- [ ] **Secure “Update Note”:** Modify the `PUT /:id` route. Before updating a note, you must first find the note by its ID. Then, check if the user field on that note matches the authenticated user’s `_id`.
-- [ ] If they match, proceed with the update.
-- [ ] If they do not match, return a 403 Forbidden status with an error message like "User is not authorized to update this note."
+- [X] **Secure “Update Note”:** Modify the `PUT /:id` route. Before updating a note, you must first find the note by its ID. Then, check if the user field on that note matches the authenticated user’s `_id`.
+    - [ ] If they match, proceed with the update.
+    - [X] If they do not match, return a 403 Forbidden status with an error message like "User is not authorized to update this note."
