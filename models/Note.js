@@ -15,6 +15,9 @@ const noteSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  /*Acceptance Criteria
+    The Note model includes a required user field referencing the User model.
+*/
   user: { 
     type: Schema.Types.ObjectId, //user's id
     ref: "User", // which model the id belongs to

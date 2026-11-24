@@ -13,12 +13,16 @@ router.get('/', async (req, res) => {
   // This currently finds all notes in the database.
   // It should only find notes owned by the logged in user.
   try {
+        /*Acceptance Criteria
+    The GET /api/notes route only returns notes created by the currently logged-in user.
+    */
     const notes = await Note.find({user: req.user._id});
     res.json(notes);
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 // GET /api/notes/:id - Get one note (optional part of the lab)
 router.get("/:id", async (req, res) => {
@@ -27,8 +31,6 @@ router.get("/:id", async (req, res) => {
     if (!note) {
       return res.status(404).json({ message: "No note found with this id!" });
     }
-
-    
     const noteUserId = note.user.toString();//
     const userOwns = noteUserId === req.user._id
     // If User is logged in, but not the owner.
@@ -48,6 +50,9 @@ router.post('/', async (req, res) => {
   try {
     const note = await Note.create({
       ...req.body,
+        /*Acceptance Criteria
+          The POST /api/notes route correctly assigns the logged-in user’s ID to the new note.
+        */
       // The user ID needs to be added here
       user: req.user._id,
     });
@@ -75,6 +80,10 @@ router.put('/:id', async (req, res) => {
     
     //console.log(note.user);//object
     //console.log(req.user._id);//string
+
+        /*Acceptance Criteria
+            The PUT /api/notes/:id route prevents users from modifying notes they do not own, returning a 403 status code
+        */
     const noteUserId = note.user.toString()
     const userOwns = noteUserId === req.user._id
     if(!userOwns){
@@ -106,6 +115,9 @@ router.delete('/:id', async (req, res) => {
       return res.status(404).json({ message: 'No note found with this id!' });
     }
 
+            /*Acceptance Criteria
+            The DELETE /api/notes/:id route prevents users from deleting notes they do not own, returning a 403 status code.
+        */
     const noteUserId = note.user.toString();//
     const userOwns = noteUserId === req.user._id
 
