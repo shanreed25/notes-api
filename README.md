@@ -38,6 +38,9 @@
 > Log in a user and copy the token. Put the token in the request's Auth tab Bearer Token or Authorization header, then send the note body as json in the body tab
 
 > Sending a request can have a title and/or content, you can also send a user fiels with an id but it will be reject/deleted and no errors
+
+- [X] **Delete User Note:** `DELETE api/notes/:id`
+> Log in a user and copy the token. Put the token in the request's Auth tab Bearer Token or Authorization header, then make the delete request
 ---
 
 
@@ -50,3 +53,8 @@
 - [X] **Secure “Update Note”:** Modify the `PUT /:id` route. Before updating a note, you must first find the note by its ID. Then, check if the user field on that note matches the authenticated user’s `_id`.
     - [ ] If they match, proceed with the update.
     - [X] If they do not match, return a 403 Forbidden status with an error message like "User is not authorized to update this note."
+
+### Secure “Delete Note”: Modify the DELETE /:id route. Similar to the update route, you must check for ownership before deleting a note.
+- [X] Find the note by its ID.
+- [X] If the user is the owner, delete the note.
+- [X] If the user is not the owner, return a 403 Forbidden status with an appropriate error message.

@@ -47,11 +47,11 @@ router.put('/:id', async (req, res) => {
       return res.status(404).json({ message: 'No note found with this id!' });
     }
 
-    console.log(req.user);// { username, email, _id }, the authmiddleware is how this route has access to the user object
+    //console.log(req.user);// { username, email, _id }, the authmiddleware is how this route has access to the user object
     
     
-    console.log(note.user);//object
-    console.log(req.user._id);//string
+    //console.log(note.user);//object
+    //console.log(req.user._id);//string
     const noteUserId = note.user.toString()
     const userOwns = noteUserId === req.user._id
     if(!userOwns){
@@ -78,10 +78,19 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     // This needs an authorization check
-    const note = await Note.findByIdAndDelete(req.params.id);
+    const note = await Note.findById(req.params.id);
     if (!note) {
       return res.status(404).json({ message: 'No note found with this id!' });
     }
+
+    const noteUserId = note.user.toString();//
+    const userOwns = noteUserId === req.user._id
+
+    if(!userOwns){
+      return res.status(403).json({ message: 'User is not authorized to delete this note.'});
+    }
+
+    await note.deleteOne();
     res.json({ message: 'Note deleted!' });
   } catch (err) {
     res.status(500).json(err);
