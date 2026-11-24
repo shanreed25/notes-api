@@ -30,9 +30,14 @@
 }
 ```
 
-- [X] **View Note for logged user:** `GET /api/notes`
-> Log in or register a user and copy the token. Put the token in the request's Auth tab Bearer Token or Authorization header, then send the note body as json in the body tab
+- [X] **View Notes for logged user:** `GET /api/notes`
+> Log in or register a user and copy the token. Put the token in the request's Auth tab Bearer Token or Authorization header, then send the request
 
+
+- [X] **Update User Note:** `PUT api/notes/:id`
+> Log in a user and copy the token. Put the token in the request's Auth tab Bearer Token or Authorization header, then send the note body as json in the body tab
+
+> Sending a request can have a title and/or content, you can also send a user fiels with an id but it will be reject/deleted and no errors
 ---
 
 
