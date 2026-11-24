@@ -27,8 +27,11 @@ userSchema.pre('save', async function (next) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
- 
-  next();
+  /*
+  Mongoose 9 doesn't pass next to an async hook. It moves on 
+  by itself when the function finishes.
+  next()
+  */
 });
  
 // custom method to compare and validate password for logging in
