@@ -19,6 +19,29 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// GET /api/notes/:id - Get one note (optional part of the lab)
+router.get("/:id", async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
+    if (!note) {
+      return res.status(404).json({ message: "No note found with this id!" });
+    }
+
+    
+    const noteUserId = note.user.toString();//
+    const userOwns = noteUserId === req.user._id
+    // If User is logged in, but not the owner.
+    if(!userOwns){
+      return res.status(403).json({ message: 'User is not authorized to view this note.'});
+    }
+
+
+    res.json(note);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
  
 // POST /api/notes - Create a new note
 router.post('/', async (req, res) => {

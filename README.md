@@ -58,3 +58,6 @@
 - [X] Find the note by its ID.
 - [X] If the user is the owner, delete the note.
 - [X] If the user is not the owner, return a 403 Forbidden status with an appropriate error message.
+
+### Secure “Get Single Note”: 
+- [X] If you have a GET /:id route, apply the same ownership check there as well.
